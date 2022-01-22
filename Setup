@@ -17,10 +17,10 @@ Laravel 8 Multiauth
 10. create admins table for admin authentication.
 
 11. Now create model called Admin for admin login, make sure it should be authenticable.
+	php artisan make:model Admin
 
 12. For Admin Login we will create seperate guards located in given location:
-    {yourRootDirectory}\config\auth.php
-    php artisan make:model Admin	
+    {yourRootDirectory}\config\auth.php    	
 
 13. Now create controller called AdminController using the following artisan command.
     php artisan make:controller AdminController
@@ -31,7 +31,7 @@ Laravel 8 Multiauth
 Route::group(['prefix' => 'admin'], function() {
 	Route::group(['middleware' => 'admin.guest'], function(){
 		Route::view('/login','admin.login')->name('admin.login');
-		Route::post('/login',[App\Http\AdminLoginController::class, 'authenticate'])->name('admin.auth');
+		Route::post('/login',[App\Http\AdminController::class, 'authenticate'])->name('admin.auth');
 	});
 	
 	Route::group(['middleware' => 'admin.auth'], function(){
